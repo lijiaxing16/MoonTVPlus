@@ -6,10 +6,10 @@ on:
   workflow_dispatch:
     inputs:
       dockerfile:
-        description: 'Dockerfile（完整版 Dockerfile / 精简版 Dockerfile.lite）'
+        description: 'Dockerfile（完整版 Dockerfile）'
         default: 'Dockerfile'
         type: choice
-        options: [Dockerfile, Dockerfile.lite]
+        options: [Dockerfile]
 
 jobs:
   build:
@@ -18,8 +18,6 @@ jobs:
         include:
           - arch: amd64
             os: ubuntu-latest
-          - arch: arm64
-            os: ubuntu-24.04-arm   # 原生 ARM 构建，不走 QEMU，快很多
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
